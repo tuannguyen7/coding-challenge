@@ -8,38 +8,49 @@ import java.util.InputMismatchException;
 
 public class TernaryXor {
 
+    static PrintWriter pw = new PrintWriter(System.out);
+
     public static void solution() {
         FastReader reader = new FastReader(System.in);
-        PrintWriter pw = new PrintWriter(System.out);
 
-        int[] number = new int[50001];
+        char[] number = new char[50001];
         int numTests = reader.nextInt(); // reads integer
         for (int i = 0; i < numTests; i++) {
             int size = reader.nextInt();
-            for (int s = 0; s < size; s++) {
-                number[s] = reader.nextInt();
-            }
-            pw.println(solve(number, size));
+            String str = reader.next();
+            solve(str);
 
         }
         pw.close();
     }
 
-    public static String solve(int[] numbers, int size) {
+    public static String solve(String number) {
         StringBuilder a = new StringBuilder();
+        StringBuilder b = new StringBuilder();
         int index = 0;
-        for (; index < size; index++)
-            if (numbers[index] == 1) {
-                a.append(1);
+        for (; index < number.length(); index++) {
+            char c = number.charAt(index);
+            if (c == '2') {
+                a.append('1');
+                b.append('1');
+            } else if (c == '1') {
+                a.append('1');
+                b.append('0');
                 break;
             } else {
-                a.append(String.valueOf(numbers[index]/ 2));
+                a.append('0');
+                b.append('0');
             }
-
-        for (int i = a.length(); i <= size; i++) {
-            a.append("0");
         }
 
+        index += 1;
+        for (; index < number.length(); index++) {
+            a.append('0');
+            b.append(number.charAt(index));
+        }
+
+        pw.println(a.toString());
+        pw.println(b.toString());
         return a.toString();
     }
 
