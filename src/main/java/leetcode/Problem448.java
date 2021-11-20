@@ -33,4 +33,32 @@ public class Problem448 {
 
         return ans;
     }
+
+    public List<Integer> findDisappearedNumbers_2(int[] nums) {
+        int i = 0;
+        List<Integer> result = new ArrayList<>();
+        while (i < nums.length) {
+            int index = -1;
+            for (; i < nums.length; i++) {
+                if (nums[i] != -1 && nums[nums[i] - 1] != -1) {
+                    index = nums[i] - 1;
+                    break;
+                }
+            }
+            if (index == -1) break;
+
+            while (nums[index] != -1) {
+                int nextIndex = nums[index] - 1;
+                nums[index] = -1;
+                index = nextIndex;
+            }
+        }
+
+        for (int j = 0; j < nums.length; j++) {
+            if (nums[j] != -1) {
+                result.add(j+1);
+            }
+        }
+        return result;
+    }
 }

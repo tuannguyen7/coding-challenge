@@ -5,25 +5,27 @@ public class Problem153 {
     public int findMin(int[] nums) {
         int lo = 0;
         int hi = nums.length - 1;
-        int lastValue = nums[nums.length - 1];
-        int minIndex = nums[lo] < nums[hi] ? lo : hi;
+        while (lo < hi) {
+            int mid = (lo + hi)/2;
+            if (nums[mid] >= nums[lo] && nums[mid] <= nums[hi]) {
+                return nums[lo];
+            }
+            if (nums[mid] < nums[lo]) {
+                hi = mid;
+                continue;
+            }
 
-        while (hi >= lo) {
-            int mid = lo + (hi - lo)/2;
-            if (nums[mid] < lastValue) {
-                minIndex = mid;
-                hi = mid - 1;
-            } else {
+            if (nums[mid] > nums[hi]) {
                 lo = mid + 1;
+                continue;
             }
         }
-
-        return nums[minIndex];
+        return Math.min(nums[lo], nums[hi]);
     }
 
     public static void main(String[] args) {
         //int[] nums = {5,1,2};
-        int[] nums = {6, 5};
+        int[] nums = {3, 1, 2};
         int min = new Problem153().findMin(nums);
         System.out.println(min);
     }
