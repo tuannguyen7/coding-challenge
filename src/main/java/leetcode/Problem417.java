@@ -9,15 +9,9 @@ import java.util.List;
 public class Problem417 {
 
     private int[][] adds = {{1, 0}, {0, 1}, {0, -1}, {-1, 0}};
+    // cach1
     public List<List<Integer>> pacificAtlantic(int[][] heights) {
         List<List<Integer>> ans = new ArrayList<>();
-        {
-            Integer[][] islands = new Integer[heights.length][heights[0].length];
-            boolean[][] visited = new boolean[heights.length][heights[0].length];
-            for (int vi = 0; vi < heights.length; vi++)
-                Arrays.fill(visited[vi], false);
-            System.out.println(recursive(heights, visited, islands, 1, 4) );
-        }
         for (int r = 0; r < heights.length; r++) {
             for (int c = 0; c < heights[0].length; c++) {
                 Integer[][] islands = new Integer[heights.length][heights[0].length];
@@ -67,6 +61,5 @@ public class Problem417 {
         Problem417 app = new Problem417();
         //int[][] heights = {{2,1},{1,2}};
         int[][] heights = {{1,2,2,3,5},{3,2,3,4,4},{2,4,5,3,1},{6,7,1,4,5},{5,1,1,2,4}};
-        LoggerUtil.INFO("{}", app.pacificAtlantic(heights));
     }
 }
