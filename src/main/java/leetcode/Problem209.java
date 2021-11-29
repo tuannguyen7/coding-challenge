@@ -29,6 +29,7 @@ public class Problem209 {
                 minLength = Math.min(minLength, r-l+1);
                 l++;
             }
+            r++;
         }
 
         if (minLength == nums.length + 1) {
