@@ -1,49 +1,33 @@
 package leetcode;
 
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Problem76 {
 
   public static String minWindow(String s, String t) {
-    Set<Character> chars = t.chars().mapToObj(e -> (char)e).collect(Collectors.toUnmodifiableSet());
-    TreeSet<CharIndex> tree = new TreeSet<>();
-    int count = 0;
-    int l =0, r =0, curMin = s.length();
-    int[] indexes = new int[128];
-    Arrays.fill(indexes, -1);
-    for (int i = 0; i < s.length(); i++) {
-      char curChar = s.charAt(i);
-      if (!chars.contains(curChar)) {
-        continue;
-      }
+    Map<Character, Integer> charCounts = new HashMap<>();
+    int charCount = t.length();
+    int curCharCount = 0;
+    int l = 0;
+    int r = l;
 
-      CharIndex newCharIndex = new CharIndex(curChar, i);
-      CharIndex forFinding = new CharIndex(curChar, indexes[curChar]);
-      indexes[curChar] = i;
-      if (!tree.contains(forFinding)) {
-        tree.add(newCharIndex);
-        count++;
-      } else {
-        tree.remove(forFinding);
-        tree.add(newCharIndex);
+    for (char c : t.toCharArray()) {
+      if (!charCounts.containsKey(c)) {
+        charCounts.put(c, 0);
       }
+      int count = charCounts.get(c);
+      charCounts.put(c, count+1);
+    }
 
-      if (count == t.length()) {
-        int newMin = tree.last().index - tree.first().index;
-        if (newMin < curMin) {
-          curMin = newMin;
-          l = tree.first().index;
-          r = tree.last().index;
-        }
+    while (l < s.length()) {
+      char curChr = s.charAt(l);
+      if (!charCounts.containsKey(curChr)) {
+
       }
     }
 
-    if (count < t.length()) return "";
-    return s.substring(l, r + 1);
+    return "";
   }
 
   public static void main(String[] args) {
@@ -57,33 +41,5 @@ public class Problem76 {
 //    System.out.println(minWindow(s2, t));
 //    System.out.println(minWindow(s3, t));
     System.out.println(minWindow(s4, t2));
-  }
-
-  public static class CharIndex implements Comparable<CharIndex> {
-    char c;
-    int index;
-
-    public CharIndex(char c, int index) {
-      this.c = c;
-      this.index = index;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
-      CharIndex charIndex = (CharIndex) o;
-      return c == charIndex.c;
-    }
-
-    @Override
-    public int hashCode() {
-      return Objects.hash(c, index);
-    }
-
-    @Override
-    public int compareTo(CharIndex o) {
-      return index - o.index;
-    }
   }
 }
