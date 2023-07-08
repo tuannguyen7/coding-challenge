@@ -2,7 +2,7 @@ package leetcode;
 
 import java.util.Arrays;
 
-public class Problem1790 {
+public class Problem1970 {
 
     public int latestDayToCross(int row, int col, int[][] cells) {
         int[][] matrix = new int[row][col];
@@ -83,7 +83,7 @@ public class Problem1790 {
     }
 
    public static void main(String[] args) {
-        var sol = new Problem1790();
+        var sol = new Problem1970();
         int[][] cells = {{1,1},{2,1},{1,2},{2,2}};
         var result = sol.latestDayToCross(2, 2, cells);
         System.out.println(result);
